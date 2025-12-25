@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SmartFood — Demo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">SmartFood</div>
+      <nav>
+        <button id="btnShowLogin" class="link">Login</button>
+        <button id="btnShowSignup" class="link">Sign Up</button>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section id="authSection" class="card">
+        <h2 id="authTitle">Welcome — please sign in</h2>
+        <div id="forms">
+          <form id="loginForm" class="form">
+            <input id="loginEmail" type="email" placeholder="Email" required />
+            <input id="loginPassword" type="password" placeholder="Password" required />
+            <button type="submit" class="btn">Login</button>
+          </form>
+
+          <form id="signupForm" class="form hidden">
+            <select id="signupRole" required>
+              <option value="">I am a...</option>
+              <option value="donor">Food Donor</option>
+              <option value="ngo">NGO Receiver</option>
+            </select>
+            <input id="signupName" type="text" placeholder="Full name" required />
+            <input id="signupEmail" type="email" placeholder="Email" required />
+            <input id="signupPassword" type="password" placeholder="Password" required />
+            <button type="submit" class="btn">Create account</button>
+          </form>
+        </div>
+        <p class="note">This compact demo requires the lite backend running (real auth).</p>
+      </section>
+
+      <section id="dashboardSection" class="card hidden">
+        <div class="dash-header">
+          <div>
+            <h3 id="dashName">User</h3>
+            <div id="dashRole">Role</div>
+          </div>
+          <div>
+            <button id="btnLogout" class="btn small">Logout</button>
+          </div>
+        </div>
+        <div class="tabs">
+          <button class="tab active" data-tab="overview">Overview</button>
+          <button class="tab" data-tab="donate">Donate</button>
+          <button class="tab" data-tab="receive">Receive</button>
+          <button class="tab" data-tab="rewards">Rewards</button>
+        </div>
+        <div id="tabContent" class="tab-content">
+          <div data-panel="overview">
+            <h4>Overview</h4>
+            <p id="stats">Loading...</p>
+          </div>
+          <div data-panel="donate" class="hidden">
+            <h4>Post a Donation</h4>
+            <form id="donationFormCompact">
+              <input id="foodType" placeholder="Food type" required />
+              <input id="quantity" type="number" step="0.1" placeholder="Quantity (kg)" required />
+              <button class="btn" type="submit">Post</button>
+            </form>
+            <div id="matchResult"></div>
+          </div>
+          <div data-panel="receive" class="hidden">
+            <h4>Available Donations</h4>
+            <div id="donationsList">(mocked list)</div>
+          </div>
+          <div data-panel="rewards" class="hidden">
+            <h4>Rewards</h4>
+            <div id="rewardsList">No data</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">Compact demo — real auth & realtime stream.</footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartFood Donation - Reduce Food Wastage</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="20" r="18" fill="#E8D5F2" stroke="#C9A5DB" stroke-width="2"/>
+                    <path d="M20 10C15 10 12 15 12 20C12 28 20 35 20 35C20 35 28 28 28 20C28 15 25 10 20 10Z" fill="#A78DC8"/>
+                    <circle cx="20" cy="20" r="4" fill="white"/>
+                </svg>
+                <span>SmartFood</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><button class="btn-login" onclick="showModal('loginModal')">Login</button></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Reduce Food Wastage, Feed Those in Need</h1>
+            <p>Connect surplus food with NGOs in real-time using intelligent matching</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="showModal('signupModal')">Get Started</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">Learn More</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="illustration-placeholder">
+                <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                    <ellipse cx="150" cy="200" rx="100" ry="30" fill="#D5E8D4" opacity="0.3"/>
+                    <rect x="80" y="100" width="140" height="120" rx="10" fill="#F5E6F3" stroke="#D9BFE8" stroke-width="2"/>
+                    <circle cx="120" cy="130" r="20" fill="#E8D5F2"/>
+                    <circle cx="180" cy="130" r="20" fill="#F0D9F0"/>
+                    <rect x="90" y="155" width="120" height="50" rx="5" fill="#D9BFE8" opacity="0.5"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2>Why Choose SmartFood?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Smart Matching</h3>
+                <p>Real-time matching algorithm connects surplus food with nearest NGOs instantly</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>Quality Tagging</h3>
+                <p>Track expiry dates and safe consumption time with smart freshness indicators</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>Predictive Alerts</h3>
+                <p>Get notified before donations arrive to optimize logistics planning</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⭐</div>
+                <h3>Gamified Rewards</h3>
+                <p>Earn points and badges for regular contributions and social impact</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Scalable Platform</h3>
+                <p>Handle data from multiple restaurants, hotels, and NGOs simultaneously</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>IoT Ready</h3>
+                <p>Future-proof integration with temperature sensors and smart storage boxes</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2>Our Mission</h2>
+        <p>Every year, millions of tons of food go to waste while many go hungry. SmartFood bridges this gap by creating a seamless platform where food surplus becomes surplus hope. We empower restaurants, hotels, and food businesses to donate responsibly while helping NGOs access fresh food efficiently.</p>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <p class="form-text">Don't have an account? <a href="#" onclick="toggleModals('loginModal', 'signupModal')">Sign up</a></p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            <h2>Sign Up</h2>
+            <form id="signupForm" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="userType">I am a:</label>
+                    <select id="userType" required onchange="updateSignupForm()">
+                        <option value="">Select...</option>
+                        <option value="donor">Food Donor</option>
+                        <option value="ngo">NGO Receiver</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email Address</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <div id="donorFields" style="display:none;">
+                    <div class="form-group">
+                        <label for="organizationName">Restaurant/Organization Name</label>
+                        <input type="text" id="organizationName" placeholder="Your business name">
+                    </div>
+                </div>
+                <div id="ngoFields" style="display:none;">
+                    <div class="form-group">
+                        <label for="ngoName">NGO Name</label>
+                        <input type="text" id="ngoName" placeholder="Your NGO name">
+                    </div>
+                    <div class="form-group">
+                        <label for="ngoCapacity">Daily Capacity (kg)</label>
+                        <input type="number" id="ngoCapacity" placeholder="e.g., 100">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Account</button>
+            </form>
+            <p class="form-text">Already have an account? <a href="#" onclick="toggleModals('signupModal', 'loginModal')">Login</a></p>
+        </div>
+    </div>
+
+    <!-- Dashboard (Hidden by default, shown after login) -->
+    <div id="dashboard" style="display:none;">
+        <div class="dashboard-container">
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h3 id="userName">User</h3>
+                    <p id="userRole">Role</p>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="#" class="nav-item active" onclick="switchTab('overview')">Overview</a>
+                    <a href="#" class="nav-item" id="donorTab" style="display:none;" onclick="switchTab('donate')">Donate Food</a>
+                    <a href="#" class="nav-item" id="ngoTab" style="display:none;" onclick="switchTab('receive')">Receive Donations</a>
+                    <a href="#" class="nav-item" id="adminTab" style="display:none;" onclick="switchTab('admin')">Admin Panel</a>
+                    <a href="#" class="nav-item" onclick="switchTab('rewards')">Rewards & Badges</a>
+                    <a href="#" class="nav-item" onclick="switchTab('profile')">Profile</a>
+                    <a href="#" class="nav-item" onclick="handleLogout()">Logout</a>
+                </nav>
+            </aside>
+
+            <main class="dashboard-content">
+                <!-- Overview Tab -->
+                <div id="overviewTab" class="tab-content active">
+                    <h2>Dashboard Overview</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h4>Total Donations</h4>
+                            <p class="stat-number" id="totalDonations">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Food Saved (kg)</h4>
+                            <p class="stat-number" id="foodSaved">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Reward Points</h4>
+                            <p class="stat-number" id="rewardPoints">0</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Impact Score</h4>
+                            <p class="stat-number" id="impactScore">0</p>
+                        </div>
+                    </div>
+                    <div id="recentActivity">
+                        <h3>Recent Activity</h3>
+                        <div id="activityList"></div>
+                    </div>
+                </div>
+
+                <!-- Donate Food Tab -->
+                <div id="donateTab" class="tab-content">
+                    <h2>Donate Surplus Food</h2>
+                    <form id="donationForm" onsubmit="handleDonation(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="foodType">Type of Food</label>
+                                <input type="text" id="foodType" placeholder="e.g., Cooked Rice, Vegetables" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="quantity">Quantity (kg)</label>
+                                <input type="number" id="quantity" step="0.1" placeholder="Enter weight in kg" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiryTime">Expiry Time</label>
+                                <input type="datetime-local" id="expiryTime" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="freshness">Food Quality</label>
+                                <select id="freshness" required>
+                                    <option value="fresh">Fresh (Just prepared)</option>
+                                    <option value="good">Good (< 2 hours)</option>
+                                    <option value="fair">Fair (2-4 hours)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea id="description" placeholder="Add any special details about the food..." rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="donationLocation">Pickup Location</label>
+                            <input type="text" id="donationLocation" placeholder="Enter your location" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Post Donation</button>
+                    </form>
+                    <div id="matchedNGOs">
+                        <h3>Matched NGOs</h3>
+                        <div id="ngosContainer"></div>
+                    </div>
+                </div>
+
+                <!-- Receive Donations Tab -->
+                <div id="receiveTab" class="tab-content">
+                    <h2>Available Donations</h2>
+                    <div class="filter-group">
+                        <input type="text" id="searchDonations" placeholder="Search donations..." onkeyup="filterDonations()">
+                        <select id="filterFreshness" onchange="filterDonations()">
+                            <option value="">All Freshness Levels</option>
+                            <option value="fresh">Fresh</option>
+                            <option value="good">Good</option>
+                            <option value="fair">Fair</option>
+                        </select>
+                    </div>
+                    <div id="donationsContainer"></div>
+                </div>
+
+                <!-- Admin Panel -->
+                <div id="adminTab" class="tab-content">
+                    <h2>Admin Panel</h2>
+                    <div class="admin-tabs">
+                        <button class="admin-tab-btn active" onclick="switchAdminTab('users')">Users Management</button>
+                        <button class="admin-tab-btn" onclick="switchAdminTab('donations')">Donations Tracking</button>
+                        <button class="admin-tab-btn" onclick="switchAdminTab('analytics')">Analytics</button>
+                    </div>
+                    <div id="usersTab" class="admin-tab-content active">
+                        <h3>All Users</h3>
+                        <div id="usersTable"></div>
+                    </div>
+                    <div id="donationsTabAdmin" class="admin-tab-content">
+                        <h3>Donation History</h3>
+                        <div id="donationsTable"></div>
+                    </div>
+                    <div id="analyticsTab" class="admin-tab-content">
+                        <h3>Platform Analytics</h3>
+                        <div class="analytics-grid" id="analyticsGrid"></div>
+                    </div>
+                </div>
+
+                <!-- Rewards & Badges Tab -->
+                <div id="rewardsTab" class="tab-content">
+                    <h2>Your Rewards & Badges</h2>
+                    <div class="rewards-container">
+                        <div class="points-display">
+                            <h3>Total Points</h3>
+                            <p class="points-number" id="totalPoints">0</p>
+                        </div>
+                        <div class="badges-container" id="badgesContainer"></div>
+                    </div>
+                    <div class="leaderboard">
+                        <h3>Top Contributors</h3>
+                        <div id="leaderboard"></div>
+                    </div>
+                </div>
+
+                <!-- Profile Tab -->
+                <div id="profileTab" class="tab-content">
+                    <h2>Your Profile</h2>
+                    <form id="profileForm" onsubmit="handleProfileUpdate(event)">
+                        <div class="form-group">
+                            <label for="profileName">Name</label>
+                            <input type="text" id="profileName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profileEmail">Email</label>
+                            <input type="email" id="profileEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profilePhone">Phone</label>
+                            <input type="tel" id="profilePhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="profileAddress">Address</label>
+                            <input type="text" id="profileAddress" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Get In Touch</h2>
+        <form id="contactForm" onsubmit="handleContact(event)">
+            <div class="form-group">
+                <input type="text" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+                <textarea placeholder="Your Message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 SmartFood Donation. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/donor.js"></script>
+    <script src="js/ngo.js"></script>
+    <script src="js/matching.js"></script>
+    <script src="js/notification.js"></script>
+    <script src="js/rewards.js"></script>
+    <script src="js/admin.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

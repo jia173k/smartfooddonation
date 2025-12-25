@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SmartFood - Lite</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>SmartFood Donation (Lite)</h1>
+      <p class="sub">Fast demo — Sign up or Login to continue</p>
+    </header>
+
+    <section class="card" id="authCard">
+      <div id="authForms">
+        <form id="signupForm">
+          <h2>Create account</h2>
+          <label>I am a:
+            <select id="userType">
+              <option value="donor">Donor</option>
+              <option value="ngo">NGO</option>
+            </select>
+          </label>
+          <label>Full name
+            <input id="signupName" required>
+          </label>
+          <label>Email
+            <input id="signupEmail" type="email" required>
+          </label>
+          <label>Password
+            <input id="signupPassword" type="password" required>
+          </label>
+          <button type="submit" class="btn">Create Account</button>
+          <p class="muted">Already registered? <a id="showLogin" href="#">Login</a></p>
+        </form>
+
+        <form id="loginForm" style="display:none;">
+          <h2>Login</h2>
+          <label>Email
+            <input id="loginEmail" type="email" required>
+          </label>
+          <label>Password
+            <input id="loginPassword" type="password" required>
+          </label>
+          <button type="submit" class="btn">Login</button>
+          <p class="muted">New here? <a id="showSignup" href="#">Create account</a></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="card" id="dashboard" style="display:none;">
+      <h2>Dashboard</h2>
+      <p id="welcome"></p>
+      <div class="stats">
+        <div class="stat">
+          <strong id="totalDonations">0</strong>
+          <span>Donations</span>
+        </div>
+        <div class="stat">
+          <strong id="foodSaved">0 kg</strong>
+          <span>Food Saved</span>
+        </div>
+      </div>
+      <button id="logoutBtn" class="btn secondary">Logout</button>
+    </section>
+
+    <footer>
+      <small>Lite demo — SmartFood Donation</small>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+/* Dashboard-specific styles */
+
+.dashboard-content h3 {
+    color: var(--primary-dark);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+/* Donation Form Styles */
+#donationForm {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow-light);
+    margin-bottom: 3rem;
+}
+
+/* Matched NGOs Container */
+#matchedNGOs {
+    margin-top: 3rem;
+}
+
+/* Donations Container */
+#donationsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    background: var(--white);
+    border-radius: 15px;
+    box-shadow: var(--shadow-light);
+    color: var(--text-light);
+}
+
+.empty-state-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+/* Profile Form */
+#profileForm {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: var(--shadow-light);
+    max-width: 600px;
+}
+
+/* Freshness Indicator */
+.freshness-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.freshness-fresh {
+    background: var(--accent-green);
+    color: #2D5A3D;
+}
+
+.freshness-good {
+    background: #FFF3CD;
+    color: #997404;
+}
+
+.freshness-fair {
+    background: #F8D7DA;
+    color: #721C24;
+}
+
+/* Expiry Timer */
+.expiry-timer {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    background: #FFE5E5;
+    color: #D32F2F;
+}
+
+.expiry-timer.expiring {
+    background: #FFF3CD;
+    color: #997404;
+}
+
+.expiry-timer.safe {
+    background: #E8F5E9;
+    color: #2E7D32;
+}
+
+/* Notification Badge */
+.notification-badge {
+    position: absolute;
+    background: var(--danger);
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+/* Status Badge */
+.status-badge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.status-pending {
+    background: #E3F2FD;
+    color: #1976D2;
+}
+
+.status-accepted {
+    background: var(--accent-green);
+    color: #2D5A3D;
+}
+
+.status-delivered {
+    background: var(--success);
+    color: white;
+}
+
+.status-expired {
+    background: var(--danger);
+    color: white;
+}
+
+/* Loading Spinner */
+.spinner {
+    border: 3px solid var(--border-color);
+    border-top: 3px solid var(--primary-dark);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    animation: slideInRight 0.3s ease;
+    z-index: 9999;
+    max-width: 400px;
+}
+
+.toast.success {
+    border-left: 4px solid var(--success);
+}
+
+.toast.error {
+    border-left: 4px solid var(--danger);
+}
+
+.toast.warning {
+    border-left: 4px solid var(--warning);
+}
+
+.toast.info {
+    border-left: 4px solid var(--primary-dark);
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Distance Badge */
+.distance {
+    color: var(--primary-dark);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* Star Rating */
+.stars {
+    font-size: 1.2rem;
+    color: #FFC107;
+    letter-spacing: 2px;
+}
+
+/* Map Container */
+.map-container {
+    width: 100%;
+    height: 400px;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 2rem 0;
+    box-shadow: var(--shadow-light);
+    background: #FAFAF9;
+}
+
+/* Success Message */
+.success-message {
+    background: #C8E6C9;
+    border-left: 4px solid var(--success);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    color: #2D5A3D;
+}
+
+/* Error Message */
+.error-message {
+    background: #FFCDD2;
+    border-left: 4px solid var(--danger);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    color: #C62828;
+}
+
+/* Info Message */
+.info-message {
+    background: #D5E8D4;
+    border-left: 4px solid var(--primary-dark);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    color: #2D5A3D;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #donationsContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .toast {
+        bottom: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+
+    .map-container {
+        height: 250px;
+    }
+}

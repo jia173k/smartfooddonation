@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #A8E6CF;        /* Pastel Mint */
+    --primary-light: #D1F2E7;  /* Light Mint */
+    --primary-dark: #7BCBAD;   /* Muted Mint */
+    --secondary: #FFD3B6;      /* Pastel Peach */
+    --secondary-light: #FFEFE6; /* Light Peach */
+    --accent-purple: #FFAAA5;  /* Soft Coral */
+    --accent-blue: #D0E1FF;    /* Pastel Blue */
+    --text-dark: #455D5D;      /* Muted Teal-ish (not harsh) */
+    --text-light: #6E7B7B;     /* Soft Gray */
+    --border-color: #EAEAF1;   /* Light border */
+    --success: #98C8A3;        /* Pastel Green success */
+    --warning: #F7D08A;        /* Soft Yellow */
+    --danger: #FF9AA2;         /* Light Coral */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      /* Stronger, more visible pastel palette */
+      --primary: #6FC3A4;        /* Pastel Mint */
+      --primary-light: #CFF4E6;
+      --primary-dark: #2E8B63;
+      --secondary: #FFB589;      /* Warm Pastel Peach */
+      --secondary-light: #FFE6D8;
+      --accent-purple: #E7A8E3;
+      --accent-blue: #A9C9FF;
+      --text-dark: #2F4F46;
+      --text-light: #586F6A;
+      --border-color: #E6EFE9;
+      --success: #98C8A3;
+      --warning: #F7D08A;
+      --danger: #FF9AA2;
+      --white: #FFFFFF;
+      --shadow: 0 8px 30px rgba(46,139,99,0.08);
+      --shadow-light: 0 3px 12px rgba(46,139,99,0.06);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text-dark);
+      background: linear-gradient(135deg, #FBFFFC 0%, #E6F7EE 100%);
+      line-height: 1.6;
+    }
+
+    /* Navigation */
+    .navbar {
+      background: var(--white);
+      box-shadow: var(--shadow-light);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container { max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display:flex; justify-content:space-between; align-items:center; }
+    .logo { display:flex; align-items:center; gap:0.5rem; font-size:1.4rem; font-weight:700; color:var(--primary-dark); }
+    .nav-menu { display:flex; list-style:none; gap:1.5rem; align-items:center; }
+    .nav-link { text-decoration:none; color:var(--text-dark); font-weight:500; transition:color .2s; }
+    .nav-link:hover, .nav-link.active { color:var(--primary-dark); }
+
+    .btn-login { background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%); border:2px solid rgba(46,139,99,0.12); padding:0.55rem 1.25rem; border-radius:22px; cursor:pointer; font-weight:600; color:#fff; }
+
+    .hamburger { display:none; }
+    .hamburger span { width:25px; height:3px; background:var(--primary-dark); border-radius:2px; }
+
+    /* Hero */
+    .hero { max-width:1200px; margin:0 auto; padding:4.5rem 2rem; display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
+    .hero-content h1 { font-size:3rem; color:var(--primary-dark); margin-bottom:1rem; line-height:1.15; }
+    .hero-content p { font-size:1.05rem; color:var(--text-light); margin-bottom:1.5rem; }
+    .hero-buttons { display:flex; gap:1rem; }
+
+    .illustration-placeholder { width:300px; height:300px; }
+
+    /* Buttons */
+    .btn { padding:0.75rem 1.8rem; border:none; border-radius:22px; font-size:1rem; font-weight:600; cursor:pointer; }
+    .btn-primary { background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%); color:#fff; box-shadow:var(--shadow); border:1px solid var(--border-color); }
+    .btn-secondary { background:transparent; color:var(--primary-dark); border:2px solid var(--primary-light); }
+
+    /* Features */
+    .features { max-width:1200px; margin:4rem auto; padding:0 2rem; }
+    .features h2 { text-align:center; font-size:2rem; margin-bottom:2rem; color:var(--primary-dark); }
+    .features-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:1.5rem; }
+    .feature-card { background:var(--white); padding:1.5rem; border-radius:14px; text-align:center; box-shadow:var(--shadow-light); border:1px solid rgba(46,139,99,0.06); transition:all .22s ease; }
+    .feature-card:hover { transform:translateY(-6px); box-shadow:var(--shadow); background:linear-gradient(135deg,#fff 0%, var(--secondary-light) 100%); }
+    .feature-icon { font-size:2.2rem; margin-bottom:0.6rem; }
+    .feature-card h3 { color:var(--primary-dark); margin-bottom:0.6rem; }
+    .feature-card p { color:var(--text-light); font-size:0.95rem; }
+
+    /* About */
+    .about { background: linear-gradient(135deg, #F7F0FA 0%, #FFF7F1 100%); max-width:1200px; margin:4rem auto; padding:2.5rem; border-radius:12px; text-align:center; }
+    .about h2 { font-size:1.8rem; color:var(--text-dark); margin-bottom:1rem; }
+    .about p { color:var(--text-dark); max-width:900px; margin:0 auto; line-height:1.7; }
+
+    /* Contact */
+    .contact { max-width:800px; margin:4rem auto; padding:0 2rem; }
+    #contactForm { background:var(--white); padding:1.5rem; border-radius:12px; box-shadow:var(--shadow); }
+
+    /* Footer */
+    .footer { background: linear-gradient(135deg, #F7F0FA 0%, #FFF7F1 100%); color:var(--text-dark); text-align:center; padding:1.5rem; margin-top:3rem; }
+
+    /* Dashboard basics (kept minimal here) */
+    .dashboard-container { max-width:1200px; margin:2rem auto; display:flex; gap:1.5rem; }
+    .sidebar { width:240px; background:var(--white); border-radius:10px; padding:1rem; box-shadow:var(--shadow-light); }
+    .dashboard-content { flex:1; background:transparent; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns:1fr; padding:3rem 1.2rem; }
+      .illustration-placeholder { display:none; }
+      .nav-menu { display:none; }
+      .hamburger { display:block; }
+      .dashboard-container { flex-direction:column; }
+    }
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .features h2,
+    .about h2,
+    .contact h2 {
+        font-size: 2rem;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}

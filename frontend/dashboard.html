@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - FoodShare</title>
+    <link rel="stylesheet" href="index.html">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>🍽️ FoodShare</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a class="nav-item active" data-page="home">📊 Dashboard</a>
+                <a class="nav-item" data-page="donations">🍱 My Donations</a>
+                <a class="nav-item" data-page="matches">🎯 Matches</a>
+                <a class="nav-item" data-page="rewards">🏆 Rewards</a>
+                <a class="nav-item" data-page="notifications">🔔 Notifications</a>
+                <a class="nav-item" data-page="profile">👤 Profile</a>
+                <a class="nav-item admin-only" data-page="admin">⚙️ Admin</a>
+            </nav>
+            <button id="logout-btn" class="btn btn-danger btn-block" style="margin-top: auto;">🚪 Logout</button>
+        </aside>
+        <button id="logoutBtn">Logout</button>
+
+
+        <main class="main-content">
+            <header class="top-bar">
+                <h1 id="page-title">Dashboard</h1>
+                <div class="user-menu">
+                    <span id="user-name">Loading...</span>
+                </div>
+            </header>
+
+            <!-- Dashboard Page -->
+            <section id="home-page" class="page home">
+                <div class="stats-grid">
+                    <div class="stat-card"><span class="stat-icon">📊</span><h3 id="stat-donations">0</h3><p>Total Donations</p></div>
+                    <div class="stat-card"><span class="stat-icon">✅</span><h3 id="stat-completed">0</h3><p>Completed</p></div>
+                    <div class="stat-card"><span class="stat-icon">🎯</span><h3 id="stat-pending">0</h3><p>Pending</p></div>
+                    <div class="stat-card"><span class="stat-icon">⭐</span><h3 id="stat-points">0</h3><p>Reward Points</p></div>
+                </div>
+                <div class="card">
+                    <h2>🔥 Quick Actions</h2>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary btn-block" onclick="goToPage('donations')">📱 Add Donation</button>
+                        <button class="btn btn-secondary btn-block" style="margin-top: 0.5rem;" onclick="goToPage('matches')">🎯 View Matches</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Donations Page -->
+            <section id="donations-page" class="page">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h2>🍱 Food Donations</h2>
+                    <button class="btn btn-primary" onclick="toggleModal('donation-modal')">+ Add Donation</button>
+                </div>
+                <div id="donations-list" class="donations-grid">
+                    <p class="text-center">Loading donations...</p>
+                </div>
+            </section>
+
+            <!-- Matches Page -->
+            <section id="matches-page" class="page">
+                <h2>🎯 Available Matches</h2>
+                <div id="matches-list" class="matches-grid">
+                    <p class="text-center">Loading matches...</p>
+                </div>
+            </section>
+
+            <!-- Rewards Page -->
+            <section id="rewards-page" class="page">
+                <div class="rewards-container">
+                    <div class="rewards-header">
+                        <h2>🏆 Your Rewards</h2>
+                        <div class="reward-stats">
+                            <div class="reward-stat"><span id="total-points">0</span><p>Points</p></div>
+                            <div class="reward-stat"><span id="user-level">Bronze</span><p>Level</p></div>
+                            <div class="reward-stat"><span id="total-donations-count">0</span><p>Donations</p></div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>🎖️ Badges Earned</h3>
+                        <div id="badges-list" class="badges">
+                            <p class="text-center">Keep donating to earn badges!</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>🎯 Top Donors Leaderboard</h3>
+                        <div id="leaderboard-list">
+                            <p class="text-center">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Notifications Page -->
+            <section id="notifications-page" class="page">
+                <h2>🔔 Notifications</h2>
+                <div id="notifications-list" class="notifications-grid">
+                    <p class="text-center">No notifications</p>
+                </div>
+            </section>
+
+            <!-- Profile Page -->
+            <section id="profile-page" class="page">
+                <div class="profile-container">
+                    <div class="profile-header">
+                        <div>
+                            <h2 id="profile-name">Loading...</h2>
+                            <p id="profile-role">User</p>
+                        </div>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-item"><label>Email</label><p id="profile-email">-</p></div>
+                        <div class="detail-item"><label>Phone</label><p id="profile-phone">-</p></div>
+                        <div class="detail-item"><label>City</label><p id="profile-city">-</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Admin Page -->
+            <section id="admin-page" class="page admin-only">
+                <h2>⚙️ Admin Dashboard</h2>
+                <div class="admin-stats">
+                    <div class="stat-card"><span class="stat-icon">👥</span><h3 id="admin-total-users">0</h3><p>Total Users</p></div>
+                    <div class="stat-card"><span class="stat-icon">👨‍🍳</span><h3 id="admin-donors">0</h3><p>Donors</p></div>
+                    <div class="stat-card"><span class="stat-icon">🤝</span><h3 id="admin-ngos">0</h3><p>NGOs</p></div>
+                    <div class="stat-card"><span class="stat-icon">🍱</span><h3 id="admin-donations">0</h3><p>Donations</p></div>
+                </div>
+                <div class="card">
+                    <h3>👥 Users</h3>
+                    <div id="admin-users-list" style="max-height: 500px; overflow-y: auto;">
+                        <p>Loading...</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Donation Modal -->
+    <div id="donation-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📱 Add Food Donation</h2>
+                <button class="close-btn" onclick="toggleModal('donation-modal')">&times;</button>
+            </div>
+            <form id="donation-form" class="form">
+                <div class="form-group"><label>Food Type *</label><input type="text" name="foodType" placeholder="e.g., Biryani" required></div>
+                <div class="form-group"><label>Quantity (kg) *</label><input type="number" name="quantity" step="0.1" placeholder="5" required></div>
+                <div class="form-group"><label>Quality *</label>
+                    <select name="quality" required>
+                        <option value="fresh">🌟 Fresh</option>
+                        <option value="good">✓ Good</option>
+                        <option value="acceptable">◐ Acceptable</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Expiry Time *</label><input type="datetime-local" name="expiryTime" required></div>
+                <div class="form-group"><label>Safe Consumption Time *</label><input type="datetime-local" name="safeConsumptionTime" required></div>
+                <div class="form-group"><label>Description</label><textarea name="description" placeholder="Any special notes..."></textarea></div>
+                <button type="submit" class="btn btn-primary btn-block">🚀 Post Donation</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+    verifyAuth();
+    setupLogout();
+</script>
+</body>
+</html>

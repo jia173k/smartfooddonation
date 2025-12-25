@@ -1,0 +1,23 @@
+/* Compact pastel styles for demo */
+:root{
+  --bg:#FBFFFC; --card:#fff; --accent:#6FC3A4; --accent-2:#FFB589; --text:#2F4F46;
+}
+*{box-sizing:border-box}
+body{font-family:Segoe UI,Arial;background:linear-gradient(180deg,var(--bg),#E6F7EE);color:var(--text);margin:0;padding:24px}
+.wrap{max-width:900px;margin:0 auto}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.brand{font-weight:700;font-size:1.25rem;color:var(--accent)}
+.link{background:transparent;border:none;color:var(--accent);cursor:pointer;padding:6px 10px}
+.card{background:var(--card);padding:18px;border-radius:10px;box-shadow:0 6px 20px rgba(46,139,99,0.06);}
+.form{display:flex;flex-direction:column;gap:8px}
+.form input, .form select{padding:8px;border:1px solid #e7efe9;border-radius:6px}
+.btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));border:none;color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer}
+.btn.small{padding:6px 8px;font-size:.85rem}
+.hidden{display:none}
+.dash-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.tabs{display:flex;gap:8px;margin-bottom:12px}
+.tab{background:#fff;border:1px solid #e7efe9;padding:6px 8px;border-radius:6px;cursor:pointer}
+.tab.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff}
+.tab-content{padding:8px}
+.note{font-size:.85rem;color:#6b776f;margin-top:8px}
+.foot{text-align:center;color:#6b776f;margin-top:14px}

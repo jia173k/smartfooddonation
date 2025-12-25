@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register - FoodShare</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #2ecc71; --secondary: #3498db; --danger: #e74c3c; 
+            --dark: #2c3e50; --light: #ecf0f1; --radius: 8px;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--dark); background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        
+        /* ===== AUTH PAGE ===== */
+        .auth-page { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+        .auth-container { width: 100%; max-width: 400px; padding: 2rem; }
+        .auth-card { background: white; padding: 2.5rem; border-radius: var(--radius); box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+        .auth-header { text-align: center; margin-bottom: 2rem; }
+        .auth-header h1 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--dark); }
+        .auth-header p { color: #7f8c8d; }
+        .auth-form { display: flex; flex-direction: column; gap: 1.5rem; }
+        .role-selection { display: flex; gap: 1rem; justify-content: center; margin-bottom: 1rem; }
+        .role-selection label { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.5rem; border-radius: var(--radius); transition: all 0.3s; }
+        .role-selection label:hover { background: var(--light); }
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .form-group label { font-weight: 600; color: var(--dark); }
+        .form-group input, .form-group select { padding: 0.8rem; border: 2px solid var(--light); border-radius: var(--radius); font-size: 1rem; transition: all 0.3s; }
+        .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 10px rgba(46,204,113,0.2); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .toggle-form { text-align: center; margin-top: 1rem; color: var(--dark); }
+        .toggle-form a { color: var(--primary); text-decoration: none; font-weight: 600; cursor: pointer; }
+        .toggle-form a:hover { text-decoration: underline; }
+        .message { padding: 1rem; border-radius: var(--radius); text-align: center; margin-top: 1rem; display: none; }
+        .message.success { background: #d4edda; color: #155724; display: block; border: 1px solid #c3e6cb; }
+        .message.error { background: #f8d7da; color: #721c24; display: block; border: 1px solid #f5c6cb; }
+        
+        /* ===== BUTTONS ===== */
+        .btn { padding: 0.8rem 1.5rem; border: none; border-radius: var(--radius); cursor: pointer; font-size: 1rem; font-weight: 600; transition: all 0.3s ease; text-decoration: none; display: inline-block; text-align: center; }
+        .btn:active { transform: scale(0.98); }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: #27ae60; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(46,204,113,0.3); }
+        .btn-primary:active { transform: translateY(0); }
+        .btn-secondary { background: var(--secondary); color: white; }
+        .btn-secondary:hover { background: #2980b9; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(52,152,219,0.3); }
+        .btn-secondary:active { transform: translateY(0); }
+        .btn-danger { background: var(--danger); color: white; }
+        .btn-danger:hover { background: #c0392b; transform: translateY(-2px); }
+        .btn-danger:active { transform: translateY(0); }
+        .btn-block { width: 100%; }
+        
+        .form-section { display: none; }
+        .form-section.active { display: block; }
+        
+        @media (max-width: 480px) {
+            .auth-card { padding: 1.5rem; }
+            .auth-header h1 { font-size: 1.5rem; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="auth-card">
+            <!-- LOGIN FORM -->
+            <div id="login-section" class="form-section active">
+                <div class="auth-header">
+                    <h1>🍽️ FoodShare</h1>
+                    <p>Sign in to your account</p>
+                </div>
+                <form id="loginForm" class="auth-form">
+                    <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required></div>
+                    <div class="form-group"><label>Password</label><input type="password" name="password" placeholder="Enter password" required></div>
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
+                <p class="toggle-form">No account? <a href="#" onclick="switchForm(); return false;">Register</a></p>
+                <div id="registerMessage" class="message"></div>
+
+            </div>
+
+            <!-- REGISTER FORM -->
+            <div id="register-section" class="form-section">
+                <div class="auth-header">
+                    <h1>🍽️ FoodShare</h1>
+                    <p>Join our food donation community</p>
+                </div>
+                <form id="registerForm" class="auth-form">
+                    <div class="role-selection">
+                        <label><input type="radio" name="role" value="donor" checked> 👨‍🍳 Donor</label>
+                        <label><input type="radio" name="role" value="ngo"> 🤝 NGO</label>
+                    </div>
+                    <div class="form-group"><label>Full Name</label><input type="text" name="name" placeholder="Enter full name" required></div>
+                    <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required></div>
+                    <div class="form-group"><label>Password</label><input type="password" name="password" placeholder="Enter password" required></div>
+                    <div class="form-group"><label>Phone</label><input type="tel" name="phone" placeholder="+91 XXXXXXXXXX"></div>
+                    <div class="form-group"><label>City</label><input type="text" name="city" placeholder="Your city"></div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Latitude</label><input type="number" name="latitude" step="0.0001" value="28.7041"></div>
+                        <div class="form-group"><label>Longitude</label><input type="number" name="longitude" step="0.0001" value="77.1025"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+                </form>
+                <p class="toggle-form">Have account? <a href="#" onclick="switchForm(); return false;">Login</a></p>
+                <div id="loginMessage" class="message"></div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        function switchForm() {
+            const loginSection = document.getElementById('login-section');
+            const registerSection = document.getElementById('register-section');
+            loginSection.classList.toggle('active');
+            registerSection.classList.toggle('active');
+            return false;
+        }
+
+        // Auto-switch to register if role parameter in URL
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const role = params.get('role');
+            if (role) {
+                const loginSection = document.getElementById('login-section');
+                const registerSection = document.getElementById('register-section');
+                loginSection.classList.remove('active');
+                registerSection.classList.add('active');
+                const roleInput = document.querySelector(`input[name="role"][value="${role}"]`);
+                if (roleInput) {
+                    roleInput.checked = true;
+                }
+            }
+        });
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>

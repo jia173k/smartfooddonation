@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SmartFood — Compact Demo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">SmartFood</div>
+      <nav>
+        <button id="btnShowLogin" class="link">Login</button>
+        <button id="btnShowSignup" class="link">Sign Up</button>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section id="authSection" class="card">
+        <h2 id="authTitle">Welcome — please sign in</h2>
+        <div id="forms">
+          <form id="loginForm" class="form">
+            <input id="loginEmail" type="email" placeholder="Email" required />
+            <input id="loginPassword" type="password" placeholder="Password" required />
+            <button type="submit" class="btn">Login</button>
+          </form>
+
+          <form id="signupForm" class="form hidden">
+            <select id="signupRole" required>
+              <option value="">I am a...</option>
+              <option value="donor">Food Donor</option>
+              <option value="ngo">NGO Receiver</option>
+            </select>
+            <input id="signupName" type="text" placeholder="Full name" required />
+            <input id="signupEmail" type="email" placeholder="Email" required />
+            <input id="signupPassword" type="password" placeholder="Password" required />
+            <button type="submit" class="btn">Create account</button>
+          </form>
+        </div>
+        <p class="note">This compact demo requires the lite backend running (real auth).</p>
+      </section>
+
+      <section id="dashboardSection" class="card hidden">
+        <div class="dash-header">
+          <div>
+            <h3 id="dashName">User</h3>
+            <div id="dashRole">Role</div>
+          </div>
+          <div>
+            <button id="btnLogout" class="btn small">Logout</button>
+          </div>
+        </div>
+        <div class="tabs">
+          <button class="tab active" data-tab="overview">Overview</button>
+          <button class="tab" data-tab="donate">Donate</button>
+          <button class="tab" data-tab="receive">Receive</button>
+          <button class="tab" data-tab="rewards">Rewards</button>
+        </div>
+        <div id="tabContent" class="tab-content">
+          <div data-panel="overview">
+            <h4>Overview</h4>
+            <p id="stats">Loading...</p>
+          </div>
+          <div data-panel="donate" class="hidden">
+            <h4>Post a Donation</h4>
+            <form id="donationFormCompact">
+              <input id="foodType" placeholder="Food type" required />
+              <input id="quantity" type="number" step="0.1" placeholder="Quantity (kg)" required />
+              <button class="btn" type="submit">Post</button>
+            </form>
+            <div id="matchResult"></div>
+          </div>
+          <div data-panel="receive" class="hidden">
+            <h4>Available Donations</h4>
+            <div id="donationsList">(mocked list)</div>
+          </div>
+          <div data-panel="rewards" class="hidden">
+            <h4>Rewards</h4>
+            <div id="rewardsList">No data</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">Compact demo — real auth required.</footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
